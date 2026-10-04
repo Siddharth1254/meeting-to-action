@@ -1,0 +1,72 @@
+{
+  "name": "Meeting-to-Action - Error handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a73b8c3f-81b8-44cc-8cf6-a61ecadeee14",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0C667708RJ",
+          "mode": "id"
+        },
+        "text": "={{ \"🚨 *Échec du workflow* : \" + ($json.workflow?.name || \"inconnu\") + \"\\n*Étape en erreur* : \" + ($json.execution?.lastNodeExecuted || \"inconnue\") + \"\\n*Erreur* : \" + ($json.execution?.error?.message || \"non précisée\") + \"\\n*Exécution* : \" + ($json.execution?.url || \"n/a\") }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "b568d94f-825c-4b1d-bb98-d3a57f9b6ff9",
+      "name": "Send a message",
+      "webhookId": "f4942f22-3731-4c15-a121-6fd68c1d1d97",
+      "credentials": {
+        "slackApi": {
+          "id": "5A30hJJtjuf32BSZ",
+          "name": "Slack account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3788644f-e74f-4ce6-aad9-d1a9a61c6fea",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4fe13a46bdf9334874d9cd6f9b1d7dc29fab103ab8426435a9435f69819487c6"
+  },
+  "nodeGroups": [],
+  "id": "3rGT3fkIeiBSWgbB",
+  "tags": []
+}

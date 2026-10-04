@@ -1,0 +1,457 @@
+{
+  "name": "meeting-to-action",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Compte rendu de réunion",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "meeting_title",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "meeting_date",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "participants"
+            },
+            {
+              "fieldLabel": "transcript",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "39969302-7391-4172-813e-e79f9c412b3a",
+      "name": "Compte rendu de réunion",
+      "webhookId": "44e96cd2-518e-4060-ac91-ee04e16d307b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c81d8e9-677d-4a7c-a1bb-b5bd9467f7fa",
+              "name": "=meeting_title",
+              "value": "={{ $json.meeting_title.trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "729032b0-493f-4e2d-8bf7-e63871e9b3b7",
+              "name": "=meeting_date",
+              "value": "={{ $json.meeting_date }}",
+              "type": "string"
+            },
+            {
+              "id": "933e9681-0098-48d1-b856-57f234f2873e",
+              "name": "=participants",
+              "value": "={{ ($json.participants || '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "23c10081-15df-43b9-9060-366bacf7d471",
+              "name": "=transcript",
+              "value": "={{ $json.transcript.trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "ba721571-5b3d-4514-aafd-85abb7039051",
+              "name": "=word_count",
+              "value": "={{ $json.transcript.trim().split(/\\s+/).length }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "fd32cfbe-eb03-44aa-81fb-a3bba4970af4",
+      "name": "clean output"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "290922b0-c896-4921-b110-edd0d6061628",
+              "leftValue": "={{ $json.word_count }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        0
+      ],
+      "id": "c6033289-6c64-4c2e-a620-9c77828e494c",
+      "name": "Transcript long enough?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  model: \"claude-sonnet-5-5\",\n  max_tokens: 2000,\n  system: \"Always answer by calling the save_meeting_summary tool. You extract structured information from French business meeting transcripts. Write in French. Rules: (1) Only record what was actually said; never invent tasks, owners or dates. (2) If a decision was reversed during the meeting, record only the FINAL decision and ignore the cancelled one. (3) owner must be a person named in the transcript, otherwise null. (4) due_date must be YYYY-MM-DD, resolved from the meeting date (for example 'jeudi' or 'la semaine prochaine' relative to the meeting date); if the deadline is vague, approximate or only a period (for example 'la semaine prochaine', 'bientôt', 'dès que possible'), use null and keep the original wording in the task text. Only use a date when a specific day or date is stated or clearly implied (for example 'demain', 'jeudi', 'le 7 octobre', 'lundi'). (5) Actions cancelled during the meeting must not appear. (6) Items nobody took ownership of go in actions with owner null, and unresolved topics go in open_questions.\",\n  tools: [{\n    name: \"save_meeting_summary\",\n    description: \"Save the structured summary of the meeting\",\n    input_schema: {\n      type: \"object\",\n      properties: {\n        summary: { type: \"string\", description: \"3 to 5 sentence summary in French\" },\n        decisions: { type: \"array\", items: { type: \"string\" } },\n        actions: { type: \"array\", items: { type: \"object\", properties: {\n          task: { type: \"string\" },\n          owner: { type: [\"string\", \"null\"] },\n          due_date: { type: [\"string\", \"null\"], description: \"YYYY-MM-DD or null\" },\n          priority: { type: \"string\", enum: [\"high\", \"medium\", \"low\"] }\n        }, required: [\"task\", \"owner\", \"due_date\", \"priority\"] } },\n        open_questions: { type: \"array\", items: { type: \"string\" } }\n      },\n      required: [\"summary\", \"decisions\", \"actions\", \"open_questions\"]\n    }\n  }],\n  messages: [{ role: \"user\", content: \"Meeting: \" + $json.meeting_title + \"\\nDate: \" + $json.meeting_date + \" (\" + new Date($json.meeting_date).toLocaleDateString('fr-FR', { weekday: 'long' }) + \")\\nParticipants: \" + $json.participants + \"\\n\\nTranscript:\\n\" + $json.transcript }]\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "84b5ac06-1ffe-42e1-8f86-012f6c17758e",
+      "name": "Claude extract",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "haoAVcBj7mRq9BF3",
+          "name": "Anthropic key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const blocks = $input.first().json.content || [];\nconst tool = blocks.find(b => b.type === 'tool_use');\n\nif (!tool || !tool.input) {\n  throw new Error('Claude did not return a tool_use block: ' + JSON.stringify(blocks).slice(0, 500));\n}\n\nconst result = tool.input;\nconst meta = $('Transcript long enough?').first().json;\n\nreturn [{\n  json: {\n    meeting_title: meta.meeting_title,\n    meeting_date: meta.meeting_date,\n    summary: result.summary,\n    decisions: result.decisions || [],\n    actions: result.actions || [],\n    open_questions: result.open_questions || []\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -96
+      ],
+      "id": "581fcef8-f544-4481-bc9b-9fcd2c81186a",
+      "name": "Parse Claude output"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0C667708RJ",
+          "mode": "id"
+        },
+        "text": "={{ \"*📋 \" + $json.meeting_title + \"* (\" + $json.meeting_date + \")\\n\\n*Résumé*\\n\" + $json.summary + \"\\n\\n*Décisions*\\n\" + $json.decisions.map(d => \"• \" + d).join(\"\\n\") + \"\\n\\n*Actions*\\n\" + $json.actions.map(a => \"• \" + a.task + \" — *\" + (a.owner || \"⚠️ sans responsable\") + \"* — \" + (a.due_date || \"pas d'échéance\") + \" (\" + a.priority + \")\").join(\"\\n\") + \"\\n\\n*Questions ouvertes*\\n\" + $json.open_questions.map(q => \"• \" + q).join(\"\\n\") }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        1120,
+        -96
+      ],
+      "id": "600d6132-b384-4631-af58-de179c88750e",
+      "name": "Post Slack recap",
+      "webhookId": "c989090c-c0cf-4377-a84d-018d98866866",
+      "credentials": {
+        "slackApi": {
+          "id": "5A30hJJtjuf32BSZ",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $('Parse Claude output').first().json;\n\nreturn data.actions.map(a => ({\n  json: {\n    date: data.meeting_date,\n    meeting: data.meeting_title,\n    task: a.task,\n    owner: a.owner || '',\n    due_date: a.due_date || '',\n    priority: a.priority,\n    status: 'open'\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        -96
+      ],
+      "id": "bb3c80dc-379a-4d64-953e-db4378a38763",
+      "name": "Actions to rows"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw",
+          "mode": "list",
+          "cachedResultName": "Actions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "meeting",
+              "displayName": "meeting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task",
+              "displayName": "task",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "owner",
+              "displayName": "owner",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "due_date",
+              "displayName": "due_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        -96
+      ],
+      "id": "f1374292-5f8d-47bd-8d07-9ed3491e730a",
+      "name": "Append to Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "f3i0VmXycKVjUsOH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0C667708RJ",
+          "mode": "id"
+        },
+        "text": "={{ \"⚠️ Compte rendu non traité : la transcription de « \" + $json.meeting_title + \" » est trop courte (\" + $json.word_count + \" mots, minimum 50). Merci de coller la transcription complète.\" }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        672,
+        96
+      ],
+      "id": "bc60d394-a4a4-4234-b5f4-b02e99ff066f",
+      "name": "Warn too short",
+      "webhookId": "32a688c3-7980-4bc6-8989-6f18c908b8dc",
+      "credentials": {
+        "slackApi": {
+          "id": "5A30hJJtjuf32BSZ",
+          "name": "Slack account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Compte rendu de réunion": {
+      "main": [
+        [
+          {
+            "node": "clean output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean output": {
+      "main": [
+        [
+          {
+            "node": "Transcript long enough?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcript long enough?": {
+      "main": [
+        [
+          {
+            "node": "Claude extract",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Warn too short",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude extract": {
+      "main": [
+        [
+          {
+            "node": "Parse Claude output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Claude output": {
+      "main": [
+        [
+          {
+            "node": "Post Slack recap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Slack recap": {
+      "main": [
+        [
+          {
+            "node": "Actions to rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actions to rows": {
+      "main": [
+        [
+          {
+            "node": "Append to Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "3rGT3fkIeiBSWgbB",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "d6657bf8-40b3-4943-83c8-94b73cff89c6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4fe13a46bdf9334874d9cd6f9b1d7dc29fab103ab8426435a9435f69819487c6"
+  },
+  "nodeGroups": [],
+  "id": "sZakP0ExxI45aKMQ",
+  "tags": []
+}
