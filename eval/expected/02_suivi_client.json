@@ -1,0 +1,19 @@
+{
+  "id": "02_suivi_client",
+  "transcript_file": "samples/02_suivi_client.txt",
+  "meeting_title": "Suivi client Lambert",
+  "meeting_date": "2026-09-29",
+  "participants": "Sophie, Antoine, M. Lambert",
+  "required_actions": [
+    { "id": "apartment_offer", "keywords": ["offre", "voltaire"], "owner": "*", "due_date": null },
+    { "id": "visit_slot", "keywords": ["visite"], "owner": "Sophie", "due_date": [null, "2026-10-03"] },
+    { "id": "attestation", "keywords": ["attestation"], "owner": "Antoine", "due_date": null },
+    { "id": "recap_email", "keywords": ["recapitulatif"], "owner": "Sophie", "due_date": [null, "2026-09-29"] }
+  ],
+  "forbidden_actions": [
+    { "id": "chatou_house", "keywords": ["chatou"], "why": "house was abandoned in the meeting" },
+    { "id": "offer_410", "keywords": ["410"], "why": "the 410 000 offer was dropped" }
+  ],
+  "decisions_must_contain": ["380000"],
+  "decisions_must_not_contain": []
+}

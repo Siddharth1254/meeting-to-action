@@ -1,0 +1,19 @@
+{
+  "id": "03_revue_annonces_decousue",
+  "transcript_file": "samples/03_revue_annonces_decousue.txt",
+  "meeting_title": "Revue des annonces",
+  "meeting_date": "2026-09-30",
+  "participants": "Julie, Marc, Antoine, Camille",
+  "required_actions": [
+    { "id": "pasteur_call", "keywords": ["pasteur"], "owner": "Antoine", "due_date": "2026-10-01" },
+    { "id": "fix_title", "keywords": ["titre"], "owner": "Julie", "due_date": "2026-09-30" },
+    { "id": "phone_video", "keywords": ["video"], "owner": "Marc", "due_date": [null, "2026-10-03", "2026-10-04"] },
+    { "id": "studio_rent", "keywords": ["studio"], "owner": null, "due_date": null },
+    { "id": "meeting_minutes", "keywords": ["compte rendu"], "owner": null, "due_date": null }
+  ],
+  "forbidden_actions": [
+    { "id": "virtual_tour", "keywords": ["visite virtuelle"], "why": "virtual tour was decided then cancelled" }
+  ],
+  "decisions_must_contain": [],
+  "decisions_must_not_contain": []
+}

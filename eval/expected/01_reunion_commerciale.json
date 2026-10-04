@@ -1,0 +1,20 @@
+{
+  "id": "01_reunion_commerciale",
+  "transcript_file": "samples/01_reunion_commerciale.txt",
+  "meeting_title": "Réunion commerciale hebdo",
+  "meeting_date": "2026-09-28",
+  "participants": "Camille, Marc, Julie, Antoine",
+  "required_actions": [
+    { "id": "photo_shoot", "keywords": ["reportage"], "owner": "Julie", "due_date": "2026-10-02" },
+    { "id": "sartrouville_listing", "keywords": ["sartrouville", ["annonce", "descriptif", "publier"]], "owner": "Marc", "due_date": "2026-10-07" },
+    { "id": "diagnostiqueur", "keywords": ["diagnostiqueur"], "owner": null, "due_date": null },
+    { "id": "followup_email", "keywords": ["relance"], "owner": "Julie", "due_date": null },
+    { "id": "salon_cost", "keywords": ["salon"], "owner": "Camille", "due_date": "2026-10-05" },
+    { "id": "esign_support", "keywords": ["signature"], "owner": "Antoine", "due_date": "2026-10-02" }
+  ],
+  "forbidden_actions": [
+    { "id": "price_drop_325", "keywords": ["325"], "why": "price drop was reversed in the meeting" }
+  ],
+  "decisions_must_contain": ["340000"],
+  "decisions_must_not_contain": []
+}

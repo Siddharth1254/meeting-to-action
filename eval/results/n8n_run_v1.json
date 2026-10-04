@@ -1,0 +1,60 @@
+{
+  "01_reunion_commerciale": {
+    "summary": "La réunion a porté sur les visites de la semaine et la signature d'un mandat à Sartrouville. Le prix de la rue des Tilleuls est maintenu à 340 000 €.",
+    "decisions": [
+      "Maintenir le prix de l'appartement de la rue des Tilleuls à 340 000 € pour l'instant et proposer au propriétaire un nouveau reportage photo pour relancer l'annonce",
+      "Faire une relance groupée par e-mail auprès des contacts sans nouvelles depuis deux semaines"
+    ],
+    "actions": [
+      { "task": "Proposer au propriétaire de la rue des Tilleuls un nouveau reportage photo (appel prévu demain) et confirmer à Camille", "owner": "Julie", "due_date": "2026-10-02", "priority": "high" },
+      { "task": "Préparer le descriptif et publier l'annonce de la maison de Sartrouville sur les portails", "owner": "Marc", "due_date": "2026-10-07", "priority": "high" },
+      { "task": "Appeler le diagnostiqueur pour les diagnostics (DPE et autres) de la maison de Sartrouville", "owner": null, "due_date": null, "priority": "high" },
+      { "task": "Préparer le modèle d'e-mail de relance et l'envoyer la semaine prochaine", "owner": "Julie", "due_date": null, "priority": "medium" },
+      { "task": "Contacter le support du logiciel de signature électronique au sujet du problème de connexion et faire un retour à Camille avant vendredi", "owner": "Antoine", "due_date": "2026-10-02", "priority": "medium" },
+      { "task": "Calculer le coût total du stand au salon de l'immobilier de novembre et communiquer le résultat lundi", "owner": "Camille", "due_date": "2026-10-05", "priority": "medium" }
+    ],
+    "open_questions": [
+      "Qui appelle le diagnostiqueur pour la maison de Sartrouville ?",
+      "Participer ou non au salon de l'immobilier de novembre : dépend du coût total",
+      "Le problème de connexion du logiciel de signature électronique vient-il de leur côté ou du support/fournisseur ?",
+      "Le propriétaire de la rue des Tilleuls acceptera-t-il le reportage photo, et faudra-t-il revoir le prix plus tard ?"
+    ]
+  },
+  "02_suivi_client": {
+    "summary": "Sophie, Antoine et M. Lambert ont fait le point sur le projet d'achat. M. Lambert a préféré l'appartement du boulevard Voltaire à la maison de Chatou.",
+    "decisions": [
+      "Abandon de l'offre sur la maison de Chatou",
+      "Préparer une offre pour l'appartement du boulevard Voltaire à 380 000 € pour commencer la négociation",
+      "Organiser une nouvelle visite de l'appartement samedi 2026-10-03 à 10 h"
+    ],
+    "actions": [
+      { "task": "Préparer l'offre d'achat pour l'appartement du boulevard Voltaire à 380 000 €", "owner": null, "due_date": null, "priority": "high" },
+      { "task": "Confirmer avec le propriétaire le créneau de visite de samedi à 10 h et envoyer un message à M. Lambert", "owner": "Sophie", "due_date": null, "priority": "high" },
+      { "task": "Envoyer à M. Lambert l'attestation d'estimation du bien pour la banque (dès que possible, pas de date précise)", "owner": "Antoine", "due_date": null, "priority": "medium" },
+      { "task": "Envoyer un récapitulatif par e-mail à M. Lambert après l'appel", "owner": "Sophie", "due_date": "2026-09-29", "priority": "low" }
+    ],
+    "open_questions": [
+      "Délai de remise de l'attestation d'estimation : dépend du service rédacteur, aucune date précise",
+      "Frais de notaire : M. Lambert n'a pas de question pour l'instant et verra avec son courtier"
+    ]
+  },
+  "03_revue_annonces_decousue": {
+    "summary": "La revue des annonces a porté sur trois biens. La visite virtuelle a été écartée au profit de meilleures photos et d'une vidéo au téléphone.",
+    "decisions": [
+      "Pas de visite virtuelle pour la maison avenue Foch (budget serré ce trimestre) : on garde de meilleures photos et une vidéo courte tournée au téléphone.",
+      "Refaire les photos du deux pièces rue Pasteur.",
+      "Corriger le titre de l'annonce de la maison avenue Foch : trois chambres plus un bureau, et non quatre chambres."
+    ],
+    "actions": [
+      { "task": "Appeler le propriétaire du deux pièces rue Pasteur pour fixer un créneau de nouvelles photos, plutôt en fin de semaine", "owner": "Antoine", "due_date": "2026-10-01", "priority": "medium" },
+      { "task": "Corriger le titre de l'annonce de la maison avenue Foch (trois chambres plus un bureau)", "owner": "Julie", "due_date": "2026-09-30", "priority": "high" },
+      { "task": "Tourner une vidéo courte au téléphone pour la maison avenue Foch, ce week-end", "owner": "Marc", "due_date": null, "priority": "medium" },
+      { "task": "Parler au propriétaire du studio près de la gare pour lui expliquer que les studios du quartier sont autour de 770 euros (il veut passer le loyer de 750 à 800 euros)", "owner": null, "due_date": null, "priority": "medium" },
+      { "task": "Rédiger le compte rendu de la réunion", "owner": null, "due_date": null, "priority": "low" }
+    ],
+    "open_questions": [
+      "Qui rédige le compte rendu de la réunion ?",
+      "Qui informe le propriétaire du studio près de la gare, et quel loyer sera finalement retenu (750, 770 ou 800 euros) ?"
+    ]
+  }
+}
