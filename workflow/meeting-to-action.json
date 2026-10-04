@@ -348,6 +348,120 @@
           "name": "Slack account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw",
+          "mode": "list",
+          "cachedResultName": "Actions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 505897647,
+          "mode": "list",
+          "cachedResultName": "Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GtDtiuzXwZB1q061L0KG_k2fMQosv5hAVJufpBSuayw/edit#gid=505897647"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date": "={{ $now.toFormat('yyyy-MM-dd HH:mm') }}",
+            "meeting_title": "={{ $('Parse Claude output').first().json.meeting_title }}",
+            "word_count": "={{ $('Transcript long enough?').first().json.word_count }}",
+            "actions": "={{ $('Parse Claude output').first().json.actions.length }}",
+            "minutes_saved": "=15"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "meeting_title",
+              "displayName": "meeting_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "word_count",
+              "displayName": "word_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "actions",
+              "displayName": "actions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "minutes_saved",
+              "displayName": "minutes_saved",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hours_saved",
+              "displayName": "hours_saved",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "0",
+              "displayName": "0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1360,
+        48
+      ],
+      "id": "a5f422e2-35aa-4b76-a91c-81ea77fa1196",
+      "name": "Log run",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "f3i0VmXycKVjUsOH",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -421,6 +535,11 @@
             "node": "Actions to rows",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Log run",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -437,7 +556,7 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
@@ -446,7 +565,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "d6657bf8-40b3-4943-83c8-94b73cff89c6",
+  "versionId": "91b43ada-9d8c-4045-aaf8-3abfe46b12ea",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4fe13a46bdf9334874d9cd6f9b1d7dc29fab103ab8426435a9435f69819487c6"
