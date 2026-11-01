@@ -3,42 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "formTitle": "Compte rendu de réunion",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "meeting_title",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "meeting_date",
-              "fieldType": "date",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "participants"
-            },
-            {
-              "fieldLabel": "transcript",
-              "fieldType": "textarea",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.6,
-      "position": [
-        0,
-        0
-      ],
-      "id": "39969302-7391-4172-813e-e79f9c412b3a",
-      "name": "Compte rendu de réunion",
-      "webhookId": "44e96cd2-518e-4060-ac91-ee04e16d307b"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -134,7 +98,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({\n  model: \"claude-sonnet-5-5\",\n  max_tokens: 2000,\n  system: \"Always answer by calling the save_meeting_summary tool. You extract structured information from French business meeting transcripts. Write in French. Rules: (1) Only record what was actually said; never invent tasks, owners or dates. (2) If a decision was reversed during the meeting, record only the FINAL decision and ignore the cancelled one. (3) owner must be a person named in the transcript, otherwise null. (4) due_date must be YYYY-MM-DD, resolved from the meeting date (for example 'jeudi' or 'la semaine prochaine' relative to the meeting date); if the deadline is vague, approximate or only a period (for example 'la semaine prochaine', 'bientôt', 'dès que possible'), use null and keep the original wording in the task text. Only use a date when a specific day or date is stated or clearly implied (for example 'demain', 'jeudi', 'le 7 octobre', 'lundi'). (5) Actions cancelled during the meeting must not appear. (6) Items nobody took ownership of go in actions with owner null, and unresolved topics go in open_questions.\",\n  tools: [{\n    name: \"save_meeting_summary\",\n    description: \"Save the structured summary of the meeting\",\n    input_schema: {\n      type: \"object\",\n      properties: {\n        summary: { type: \"string\", description: \"3 to 5 sentence summary in French\" },\n        decisions: { type: \"array\", items: { type: \"string\" } },\n        actions: { type: \"array\", items: { type: \"object\", properties: {\n          task: { type: \"string\" },\n          owner: { type: [\"string\", \"null\"] },\n          due_date: { type: [\"string\", \"null\"], description: \"YYYY-MM-DD or null\" },\n          priority: { type: \"string\", enum: [\"high\", \"medium\", \"low\"] }\n        }, required: [\"task\", \"owner\", \"due_date\", \"priority\"] } },\n        open_questions: { type: \"array\", items: { type: \"string\" } }\n      },\n      required: [\"summary\", \"decisions\", \"actions\", \"open_questions\"]\n    }\n  }],\n  messages: [{ role: \"user\", content: \"Meeting: \" + $json.meeting_title + \"\\nDate: \" + $json.meeting_date + \" (\" + new Date($json.meeting_date).toLocaleDateString('fr-FR', { weekday: 'long' }) + \")\\nParticipants: \" + $json.participants + \"\\n\\nTranscript:\\n\" + $json.transcript }]\n}) }}",
+        "jsonBody": "={{ JSON.stringify({\n  model: \"claude-sonnet-5-5\",\n  max_tokens: 2000,\n  system: \"Always answer by calling the save_meeting_summary tool. You extract structured information from business meeting transcripts. The transcript may be in any language, but always write the output in English. Rules: (1) Only record what was actually said; never invent tasks, owners or dates. (2) If a decision was reversed during the meeting, record only the FINAL decision and ignore the cancelled one. (3) owner must be a person named in the transcript, otherwise null. (4) due_date must be YYYY-MM-DD, resolved from the meeting date (for example 'Thursday' relative to the meeting date); if the deadline is vague, approximate or only a period (for example 'next week', 'soon', 'as soon as possible'), use null and keep the original wording in the task text. Only use a date when a specific day or date is stated or clearly implied (for example 'tomorrow', 'Thursday', 'October 7th', 'Monday'). (5) Actions cancelled during the meeting must not appear. (6) Items nobody took ownership of go in actions with owner null, and unresolved topics go in open_questions.\",\n  tools: [{\n    name: \"save_meeting_summary\",\n    description: \"Save the structured summary of the meeting\",\n    input_schema: {\n      type: \"object\",\n      properties: {\n        summary: { type: \"string\", description: \"3 to 5 sentence summary in English\" },\n        decisions: { type: \"array\", items: { type: \"string\" } },\n        actions: { type: \"array\", items: { type: \"object\", properties: {\n          task: { type: \"string\" },\n          owner: { type: [\"string\", \"null\"] },\n          due_date: { type: [\"string\", \"null\"], description: \"YYYY-MM-DD or null\" },\n          priority: { type: \"string\", enum: [\"high\", \"medium\", \"low\"] }\n        }, required: [\"task\", \"owner\", \"due_date\", \"priority\"] } },\n        open_questions: { type: \"array\", items: { type: \"string\" } }\n      },\n      required: [\"summary\", \"decisions\", \"actions\", \"open_questions\"]\n    }\n  }],\n  messages: [{ role: \"user\", content: \"Meeting: \" + $json.meeting_title + \"\\nDate: \" + $json.meeting_date + \" (\" + new Date($json.meeting_date).toLocaleDateString('en-US', { weekday: 'long' }) + \")\\nParticipants: \" + $json.participants + \"\\n\\nTranscript:\\n\" + $json.transcript }]\n}) }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -173,7 +137,7 @@
           "value": "C0C667708RJ",
           "mode": "id"
         },
-        "text": "={{ \"*📋 \" + $json.meeting_title + \"* (\" + $json.meeting_date + \")\\n\\n*Résumé*\\n\" + $json.summary + \"\\n\\n*Décisions*\\n\" + $json.decisions.map(d => \"• \" + d).join(\"\\n\") + \"\\n\\n*Actions*\\n\" + $json.actions.map(a => \"• \" + a.task + \" — *\" + (a.owner || \"⚠️ sans responsable\") + \"* — \" + (a.due_date || \"pas d'échéance\") + \" (\" + a.priority + \")\").join(\"\\n\") + \"\\n\\n*Questions ouvertes*\\n\" + $json.open_questions.map(q => \"• \" + q).join(\"\\n\") }}",
+        "text": "={{ \"*📋 \" + $json.meeting_title + \"* (\" + $json.meeting_date + \")\\n\\n*Summary*\\n\" + $json.summary + \"\\n\\n*Decisions*\\n\" + $json.decisions.map(d => \"• \" + d).join(\"\\n\") + \"\\n\\n*Actions*\\n\" + $json.actions.map(a => \"• \" + a.task + \" — *\" + (a.owner || \"⚠️ no owner\") + \"* — \" + (a.due_date || \"no due date\") + \" (\" + a.priority + \")\").join(\"\\n\") + \"\\n\\n*Open questions*\\n\" + $json.open_questions.map(q => \"• \" + q).join(\"\\n\") }}",
         "otherOptions": {
           "includeLinkToWorkflow": false
         }
@@ -328,7 +292,7 @@
           "value": "C0C667708RJ",
           "mode": "id"
         },
-        "text": "={{ \"⚠️ Compte rendu non traité : la transcription de « \" + $json.meeting_title + \" » est trop courte (\" + $json.word_count + \" mots, minimum 50). Merci de coller la transcription complète.\" }}",
+        "text": "={{ \"⚠️ Meeting not processed: the transcript for “\" + $json.meeting_title + \"” is too short (\" + $json.word_count + ($json.word_count === 1 ? \" word\" : \" words\") + \", minimum 50). Please paste the full transcript.\" }}",
         "otherOptions": {
           "includeLinkToWorkflow": false
         }
@@ -373,7 +337,7 @@
             "meeting_title": "={{ $('Parse Claude output').first().json.meeting_title }}",
             "word_count": "={{ $('Transcript long enough?').first().json.word_count }}",
             "actions": "={{ $('Parse Claude output').first().json.actions.length }}",
-            "minutes_saved": "=15"
+            "minutes_saved": "15"
           },
           "matchingColumns": [],
           "schema": [
@@ -384,7 +348,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "meeting_title",
@@ -393,7 +358,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "word_count",
@@ -402,7 +368,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "actions",
@@ -411,7 +378,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "minutes_saved",
@@ -420,7 +388,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "hours_saved",
@@ -435,6 +404,26 @@
             {
               "id": "0",
               "displayName": "0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "recap",
+              "displayName": "recap",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Assumption: 15 min saved per recap",
+              "displayName": "Assumption: 15 min saved per recap",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -462,21 +451,46 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "formTitle": "Compte rendu de réunion",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "meeting_title",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "meeting_date",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "participants"
+            },
+            {
+              "fieldLabel": "transcript",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "39969302-7391-4172-813e-e79f9c412b3a",
+      "name": "Meeting Recap",
+      "webhookId": "44e96cd2-518e-4060-ac91-ee04e16d307b"
     }
   ],
   "pinData": {},
   "connections": {
-    "Compte rendu de réunion": {
-      "main": [
-        [
-          {
-            "node": "clean output",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "clean output": {
       "main": [
         [
@@ -554,6 +568,17 @@
           }
         ]
       ]
+    },
+    "Meeting Recap": {
+      "main": [
+        [
+          {
+            "node": "clean output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -565,7 +590,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "91b43ada-9d8c-4045-aaf8-3abfe46b12ea",
+  "versionId": "d1282b97-a214-4980-9379-d74dcd7e3816",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4fe13a46bdf9334874d9cd6f9b1d7dc29fab103ab8426435a9435f69819487c6"

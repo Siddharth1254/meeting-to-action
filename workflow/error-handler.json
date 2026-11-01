@@ -20,7 +20,7 @@
           "value": "C0C667708RJ",
           "mode": "id"
         },
-        "text": "={{ \"🚨 *Échec du workflow* : \" + ($json.workflow?.name || \"inconnu\") + \"\\n*Étape en erreur* : \" + ($json.execution?.lastNodeExecuted || \"inconnue\") + \"\\n*Erreur* : \" + ($json.execution?.error?.message || \"non précisée\") + \"\\n*Exécution* : \" + ($json.execution?.url || \"n/a\") }}",
+        "text": "={{ \"🚨 *Workflow failed*: \" + ($json.workflow?.name || \"unknown\") + \"\\n*Failed step*: \" + ($json.execution?.lastNodeExecuted || \"unknown\") + \"\\n*Error*: \" + ($json.execution?.error?.message || \"not specified\") + \"\\n*Execution*: \" + ($json.execution?.url || \"n/a\") }}",
         "otherOptions": {
           "includeLinkToWorkflow": false
         }
@@ -61,7 +61,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "3788644f-e74f-4ce6-aad9-d1a9a61c6fea",
+  "versionId": "ff2c3c86-68c8-4f75-be6b-cfb0ed4ffb2e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4fe13a46bdf9334874d9cd6f9b1d7dc29fab103ab8426435a9435f69819487c6"

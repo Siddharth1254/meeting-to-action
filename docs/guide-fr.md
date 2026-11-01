@@ -1,3 +1,5 @@
+> Version française du guide (la capture d'écran du formulaire et du compte rendu montrent la version anglaise de l'outil). English version: [guide-en.md](guide-en.md).
+
 # Assistant « Compte rendu de réunion » : guide d'une page
 
 **À quoi ça sert.** Vous collez la transcription d'une réunion, et en environ 15 secondes l'équipe reçoit dans Slack un compte rendu clair : résumé, décisions, actions avec responsable et échéance, questions ouvertes. Chaque action est aussi ajoutée dans le tableau de suivi (Google Sheets).
