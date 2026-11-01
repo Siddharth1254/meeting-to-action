@@ -1,7 +1,7 @@
 # Meeting-to-Action Assistant
 
 An n8n + Claude workflow that turns a meeting transcript into a summary, decisions, assigned
-actions and open questions, posts the recap to Slack and logs every run in Google Sheets.
+actions and open questions, posts the recap to Slack, adds one row per action to a tracking Google Sheet and logs every run.
 
 **The problem.** Nobody likes writing meeting notes, so actions get lost and owners are unclear.
 This workflow produces the recap in about 15 seconds, without inventing owners or deadlines that
@@ -46,7 +46,7 @@ Form (title, date, participants, transcript)
         |
    Parse + validate output (Code node)
         |
-   Slack recap
+   Slack recap  ---->  one Google Sheet row per action (status: open)
         |
         +---------->  run log (date, title, word count, actions, minutes saved)
 
@@ -59,8 +59,8 @@ Any failure  --> Error workflow --> Slack alert with the failed step
   (`save_meeting_summary`), so the result is typed JSON: `summary`, `decisions`, `actions`
   (`task`, `owner`, `due_date`, `priority`), `open_questions`.
 - **Validation:** a Code node finds the `tool_use` block and merges title and date back in.
-- **Outputs:** a formatted Slack recap (actions without owner or date are flagged) and a row in a `Log` tab.
-- **Usage log:** every run adds a row (date, title, word count, number of actions, 15 minutes saved, an
+- **Outputs:** a formatted Slack recap (actions without owner or date are flagged) and one Sheet row per action with status `open`.
+- **Usage log:** every run adds a row to the `Log` tab (date, title, word count, number of actions, 15 minutes saved, an
   assumption, not a measurement) and a counter shows hours saved.
 - **Errors:** a separate error workflow posts a Slack alert with the failed step and a link to the execution.
 
@@ -69,8 +69,9 @@ Any failure  --> Error workflow --> Slack alert with the failed step
 1. In n8n, **Import from file** both `workflow/meeting-to-action.json` and `workflow/error-handler.json`.
 2. Create your own credentials (Anthropic key as a Header Auth credential named `x-api-key`, Slack, Google Sheets)
    and select them on the nodes. No secrets are stored in the exports.
-3. Point the Google Sheets node at your own sheet (a `Log` tab with the headers `date`, `meeting_title`,
-   `word_count`, `actions`, `minutes_saved`) and the Slack nodes at your channel.
+3. Point the two Google Sheets nodes at your own sheet and the Slack nodes at your channel. The sheet needs two tabs:
+   `Sheet1` with the headers `date`, `meeting`, `task`, `owner`, `due_date`, `priority`, `status` (one row per action),
+   and `Log` with `date`, `meeting_title`, `word_count`, `actions`, `minutes_saved` (one row per run).
 4. In the main workflow's settings, set the error workflow to the imported handler, then publish both.
 
 ## Prompt versions

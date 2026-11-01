@@ -15,7 +15,7 @@
 
    ![The recap in Slack](img/guide-2-slack.png)
 
-4. Open the tracking sheet (link in the same channel): one row per run, with the title, word count and number of actions.
+4. Open the tracking sheet (link in the same channel): one row per action, with its owner, due date, priority and status "open".
 
    ![The tracking sheet](img/guide-3-tableau.png)
 
@@ -43,4 +43,4 @@
 
 After each recap, tell us in the Slack thread whether it was **useful** or not, and why. We collect the first feedback for one week, then fix the most annoying issues.
 
-*Time-saving assumption: 15 minutes saved per recap (an estimate, tracked in the "Log" tab of the sheet).*
+*Time-saving assumption: 15 minutes saved per recap (an estimate, tracked in the "Log" tab of the sheet, which gets one row per run).*
