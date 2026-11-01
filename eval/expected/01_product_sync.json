@@ -1,0 +1,87 @@
+{
+  "id": "01_product_sync",
+  "transcript_file": "samples/01_product_sync.txt",
+  "meeting_title": "Weekly product sync",
+  "meeting_date": "2026-11-02",
+  "participants": "Maya, Tom, Dev, Lena",
+  "required_actions": [
+    {
+      "id": "mobile_login_fix",
+      "keywords": [
+        [
+          "login",
+          "log-in",
+          "log in"
+        ]
+      ],
+      "owner": "Dev",
+      "due_date": "2026-11-03"
+    },
+    {
+      "id": "survey_results",
+      "keywords": [
+        "survey"
+      ],
+      "owner": "Lena",
+      "due_date": "2026-11-06"
+    },
+    {
+      "id": "launch_checklist",
+      "keywords": [
+        "checklist"
+      ],
+      "owner": "Maya",
+      "due_date": "2026-11-05"
+    },
+    {
+      "id": "board_roadmap",
+      "keywords": [
+        "roadmap"
+      ],
+      "owner": "Tom",
+      "due_date": "2026-11-10"
+    },
+    {
+      "id": "venue",
+      "keywords": [
+        "venue"
+      ],
+      "owner": null,
+      "due_date": null
+    },
+    {
+      "id": "beta_email",
+      "keywords": [
+        "beta"
+      ],
+      "owner": "Lena",
+      "due_date": null
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "id": "price_cut_39",
+      "keywords": [
+        [
+          "39",
+          "price cut",
+          "cut the pro",
+          "lower the pro",
+          "reduce the pro"
+        ]
+      ],
+      "why": "price cut was reversed"
+    },
+    {
+      "id": "webinar",
+      "keywords": [
+        "webinar"
+      ],
+      "why": "webinar was dropped"
+    }
+  ],
+  "decisions_must_contain": [
+    "49"
+  ],
+  "decisions_must_not_contain": []
+}

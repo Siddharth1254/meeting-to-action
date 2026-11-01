@@ -1,0 +1,91 @@
+{
+  "id": "03_ops_standup_messy",
+  "transcript_file": "samples/03_ops_standup_messy.txt",
+  "meeting_title": "Ops stand-up",
+  "meeting_date": "2026-11-04",
+  "participants": "Omar, Julie, Nina, Raj",
+  "required_actions": [
+    {
+      "id": "monitors",
+      "keywords": [
+        "monitor"
+      ],
+      "owner": "Julie",
+      "due_date": "2026-11-04"
+    },
+    {
+      "id": "spreadsheet_fix",
+      "keywords": [
+        [
+          "formula",
+          "spreadsheet"
+        ]
+      ],
+      "owner": "Raj",
+      "due_date": [
+        null,
+        "2026-11-07",
+        "2026-11-08"
+      ]
+    },
+    {
+      "id": "call_vendor",
+      "keywords": [
+        "vendor"
+      ],
+      "owner": "Omar",
+      "due_date": "2026-11-05"
+    },
+    {
+      "id": "onboarding_doc",
+      "keywords": [
+        "onboarding"
+      ],
+      "owner": "Nina",
+      "due_date": "2026-11-06"
+    },
+    {
+      "id": "air_conditioning",
+      "keywords": [
+        [
+          "air condition",
+          "facilities"
+        ]
+      ],
+      "owner": null,
+      "due_date": null
+    },
+    {
+      "id": "minutes",
+      "keywords": [
+        "minutes"
+      ],
+      "owner": null,
+      "due_date": null
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "id": "python_rebuild",
+      "keywords": [
+        "python"
+      ],
+      "why": "Python rebuild was scrapped"
+    },
+    {
+      "id": "biweekly",
+      "keywords": [
+        [
+          "bi-weekly",
+          "biweekly",
+          "every two weeks"
+        ]
+      ],
+      "why": "stand-up stays weekly"
+    }
+  ],
+  "decisions_must_contain": [
+    "weekly"
+  ],
+  "decisions_must_not_contain": []
+}

@@ -1,0 +1,43 @@
+Maya: Okay, let's get started. Quick numbers first. Signups were up about twelve percent last week, and trial-to-paid conversion is holding at nine percent.
+
+Tom: Nice. Is that before or after the pricing page change?
+
+Maya: After. Which brings me to pricing. I was thinking we cut the Pro plan from forty-nine to thirty-nine dollars to push conversion.
+
+Dev: Hmm, that's a twenty percent cut. Are we sure?
+
+Lena: Support says customers rarely complain about price. They complain about missing integrations.
+
+Tom: And finance modelled it. At thirty-nine we lose money on every account under fifty seats.
+
+Maya: Fair enough. Okay, scrap the price cut. Pro stays at forty-nine dollars. We'll revisit after the integrations ship.
+
+Dev: Speaking of which, the login bug on the mobile app is still biting people. I'll fix it by end of day tomorrow.
+
+Maya: Great, thanks Dev. Next, the launch. We said we'd run a webinar alongside it.
+
+Lena: Honestly nobody has time to run a webinar. Can we drop it?
+
+Maya: Yes, drop the webinar. We'll keep the launch simple. Lena, where are we on the customer survey?
+
+Lena: Almost done. I'll compile the survey results and share them with everyone by Friday.
+
+Maya: Perfect. And I'll send the launch checklist to Dev by Thursday so engineering can plan around it.
+
+Dev: Thursday works.
+
+Tom: Board meeting is coming up. I'll send the updated roadmap to the board on the tenth.
+
+Maya: Good. What else... the customer event in December. We still don't have a venue booked.
+
+Tom: Yeah, somebody needs to book the venue.
+
+Lena: Not me, I'm swamped.
+
+Dev: Same here.
+
+Maya: Okay, we'll come back to that.
+
+Lena: Oh, and the beta users. They deserve an email about the new features. I'll write to them sometime next week.
+
+Maya: Sounds good. Alright, that's everything. Thanks all.

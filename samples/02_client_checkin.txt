@@ -1,0 +1,35 @@
+Sarah: Hi Priya, thanks for joining. Ben from our solutions team is here too.
+
+Priya: Hi both. Thanks for making time.
+
+Sarah: So last time you were leaning towards the Starter plan. Has anything changed?
+
+Priya: Actually yes. About sixty people would need access now, and Starter caps out at twenty-five seats.
+
+Ben: Right, then the Team plan makes more sense. It covers up to a hundred seats and includes the audit log.
+
+Priya: Okay, let's go with the Team plan, billed annually. Forget Starter.
+
+Sarah: Great. Do you still want the SSO add-on we talked about?
+
+Priya: Actually, no. Our IT team says Google login is enough. Skip the SSO add-on.
+
+Sarah: Understood. I'll send you the formal quote today.
+
+Priya: Perfect. Our legal team will want to see the security details, though.
+
+Ben: I'll send you our security whitepaper as soon as I can. And I'll set up a sandbox workspace for your team by Thursday so you can start testing.
+
+Priya: That would be great. I also need to fill in the security questionnaire your team sent. I'll do that when I get a chance, probably after our finance review.
+
+Sarah: No rush. Once the contract is signed, Ben will book the onboarding session with your admins.
+
+Ben: Yes, I'll schedule that after signature.
+
+Sarah: I'll also email you a recap of this call right after we hang up.
+
+Priya: Thanks, that helps me brief my boss.
+
+Sarah: Anything else?
+
+Priya: No, that's all. Talk soon.

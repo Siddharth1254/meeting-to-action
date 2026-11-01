@@ -4,7 +4,7 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "summary": { "type": "string", "description": "3 to 5 sentence summary in French" },
+      "summary": { "type": "string", "description": "3 to 5 sentence summary in English" },
       "decisions": { "type": "array", "items": { "type": "string" } },
       "actions": {
         "type": "array",

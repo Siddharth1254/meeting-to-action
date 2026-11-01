@@ -1,0 +1,334 @@
+{
+  "model": "claude-sonnet-5-5",
+  "date": "2026-11-01T17:49:46",
+  "scores": [
+    {
+      "id": "01_product_sync",
+      "required": 6,
+      "found": 6,
+      "owner_ok": 6,
+      "due_ok": 6,
+      "hallucinations": [],
+      "extra_actions": 0,
+      "decision_problems": [],
+      "details": [
+        {
+          "id": "mobile_login_fix",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Dev",
+          "actual_due": "2026-11-03"
+        },
+        {
+          "id": "survey_results",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Lena",
+          "actual_due": "2026-11-06"
+        },
+        {
+          "id": "launch_checklist",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Maya",
+          "actual_due": "2026-11-05"
+        },
+        {
+          "id": "board_roadmap",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Tom",
+          "actual_due": "2026-11-10"
+        },
+        {
+          "id": "venue",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": null,
+          "actual_due": null
+        },
+        {
+          "id": "beta_email",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Lena",
+          "actual_due": null
+        }
+      ]
+    },
+    {
+      "id": "02_client_checkin",
+      "required": 6,
+      "found": 6,
+      "owner_ok": 6,
+      "due_ok": 6,
+      "hallucinations": [],
+      "extra_actions": 0,
+      "decision_problems": [],
+      "details": [
+        {
+          "id": "formal_quote",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Sarah",
+          "actual_due": "2026-11-03"
+        },
+        {
+          "id": "whitepaper",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Ben",
+          "actual_due": null
+        },
+        {
+          "id": "sandbox",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Ben",
+          "actual_due": "2026-11-05"
+        },
+        {
+          "id": "questionnaire",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Priya",
+          "actual_due": null
+        },
+        {
+          "id": "onboarding",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Ben",
+          "actual_due": null
+        },
+        {
+          "id": "recap_email",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Sarah",
+          "actual_due": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "id": "03_ops_standup_messy",
+      "required": 6,
+      "found": 6,
+      "owner_ok": 6,
+      "due_ok": 6,
+      "hallucinations": [],
+      "extra_actions": 0,
+      "decision_problems": [],
+      "details": [
+        {
+          "id": "monitors",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Julie",
+          "actual_due": "2026-11-04"
+        },
+        {
+          "id": "spreadsheet_fix",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Raj",
+          "actual_due": "2026-11-07"
+        },
+        {
+          "id": "call_vendor",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Omar",
+          "actual_due": "2026-11-05"
+        },
+        {
+          "id": "onboarding_doc",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": "Nina",
+          "actual_due": "2026-11-06"
+        },
+        {
+          "id": "air_conditioning",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": null,
+          "actual_due": null
+        },
+        {
+          "id": "minutes",
+          "found": true,
+          "owner_ok": true,
+          "due_ok": true,
+          "actual_owner": null,
+          "actual_due": null
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "01_product_sync": {
+      "summary": "The team reviewed last week's metrics: signups rose about 12% and trial-to-paid conversion held at 9%. A proposed Pro plan price cut from $49 to $39 was scrapped after support feedback and finance modelling showed losses on small accounts. The Pro plan stays at $49 and will be revisited once the integrations ship. The launch webinar was dropped to keep the launch simple. Several follow-ups were assigned, but the December customer event venue is still unbooked and nobody has taken ownership of it.",
+      "decisions": [
+        "Pro plan price stays at $49; the cut to $39 was scrapped and will be revisited after the integrations ship.",
+        "The webinar alongside the launch is dropped; the launch will be kept simple."
+      ],
+      "actions": [
+        {
+          "task": "Fix the login bug on the mobile app",
+          "owner": "Dev",
+          "due_date": "2026-11-03",
+          "priority": "high"
+        },
+        {
+          "task": "Compile the customer survey results and share them with everyone",
+          "owner": "Lena",
+          "due_date": "2026-11-06",
+          "priority": "medium"
+        },
+        {
+          "task": "Send the launch checklist to Dev so engineering can plan around it",
+          "owner": "Maya",
+          "due_date": "2026-11-05",
+          "priority": "medium"
+        },
+        {
+          "task": "Send the updated roadmap to the board",
+          "owner": "Tom",
+          "due_date": "2026-11-10",
+          "priority": "medium"
+        },
+        {
+          "task": "Book the venue for the December customer event",
+          "owner": null,
+          "due_date": null,
+          "priority": "high"
+        },
+        {
+          "task": "Write an email to beta users about the new features (sometime next week)",
+          "owner": "Lena",
+          "due_date": null,
+          "priority": "low"
+        }
+      ],
+      "open_questions": [
+        "Who will book the venue for the December customer event? Nobody has taken ownership and it was deferred.",
+        "When will the Pro plan pricing be revisited? It depends on the integrations shipping, with no date set."
+      ]
+    },
+    "02_client_checkin": {
+      "summary": "Sarah and Ben met with client Priya for a check-in. Because about 60 users now need access, exceeding the Starter plan's 25-seat cap, they chose the Team plan billed annually. Priya declined the SSO add-on since Google login is sufficient. Sarah will send the formal quote and a recap, and Ben will send the security whitepaper and set up a sandbox workspace. Priya will complete the security questionnaire after her finance review.",
+      "decisions": [
+        "Client will go with the Team plan, billed annually (Starter plan dropped).",
+        "The SSO add-on will not be purchased; Google login is sufficient for the client's IT team."
+      ],
+      "actions": [
+        {
+          "task": "Send the formal quote to Priya",
+          "owner": "Sarah",
+          "due_date": "2026-11-03",
+          "priority": "high"
+        },
+        {
+          "task": "Email Priya a recap of the call right after the call",
+          "owner": "Sarah",
+          "due_date": "2026-11-03",
+          "priority": "medium"
+        },
+        {
+          "task": "Send the security whitepaper to Priya as soon as I can",
+          "owner": "Ben",
+          "due_date": null,
+          "priority": "high"
+        },
+        {
+          "task": "Set up a sandbox workspace for Priya's team to start testing",
+          "owner": "Ben",
+          "due_date": "2026-11-05",
+          "priority": "high"
+        },
+        {
+          "task": "Fill in the security questionnaire, when she gets a chance, probably after the finance review",
+          "owner": "Priya",
+          "due_date": null,
+          "priority": "medium"
+        },
+        {
+          "task": "Book the onboarding session with the client's admins after the contract is signed",
+          "owner": "Ben",
+          "due_date": null,
+          "priority": "medium"
+        }
+      ],
+      "open_questions": [
+        "When will the contract be signed (pending the client's finance review)?"
+      ]
+    },
+    "03_ops_standup_messy": {
+      "summary": "The Ops stand-up discussed whether to move to a bi-weekly schedule but kept it weekly, since going bi-weekly previously caused a supplier issue to be missed. Julie will order replacement monitors for the flickering ones in the second room today. Raj will fix the spreadsheet formulas behind the wrong sales dashboard totals this weekend. Omar will call the vendor about mismatched invoices on Thursday, and Nina will update the outdated onboarding doc by Friday. Nobody took ownership of reporting the broken air conditioning to facilities or of writing last week's minutes.",
+      "decisions": [
+        "Keep the stand-up weekly (not bi-weekly).",
+        "Fix the sales dashboard by correcting the spreadsheet formulas rather than rebuilding the report in Python."
+      ],
+      "actions": [
+        {
+          "task": "Order replacement monitors for the second room (flickering monitors)",
+          "owner": "Julie",
+          "due_date": "2026-11-04",
+          "priority": "medium"
+        },
+        {
+          "task": "Fix the spreadsheet formulas causing wrong totals on the sales dashboard (this weekend)",
+          "owner": "Raj",
+          "due_date": "2026-11-07",
+          "priority": "medium"
+        },
+        {
+          "task": "Call the vendor about the mismatched invoices",
+          "owner": "Omar",
+          "due_date": "2026-11-05",
+          "priority": "high"
+        },
+        {
+          "task": "Update the outdated onboarding doc",
+          "owner": "Nina",
+          "due_date": "2026-11-06",
+          "priority": "medium"
+        },
+        {
+          "task": "Tell facilities that the air conditioning in the main office is still broken",
+          "owner": null,
+          "due_date": null,
+          "priority": "medium"
+        },
+        {
+          "task": "Write the minutes from last week's meeting",
+          "owner": null,
+          "due_date": null,
+          "priority": "low"
+        }
+      ],
+      "open_questions": [
+        "Who will report the broken air conditioning in the main office to facilities?",
+        "Who will write the minutes from last week's meeting (and were they ever written)?"
+      ]
+    }
+  }
+}

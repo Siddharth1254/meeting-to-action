@@ -1,0 +1,41 @@
+Omar: Okay, can everyone hear me? Julie, you're on mute. Julie? There we go.
+
+Julie: Sorry, the mic... anyway, good morning.
+
+Omar: So, first topic. Should we move the stand-up to every two weeks instead of weekly?
+
+Nina: I'd say yes, honestly. Weekly feels like a lot.
+
+Raj: Hmm, but last time we went bi-weekly we missed the supplier issue completely.
+
+Omar: True. Okay, stay weekly then. Done.
+
+Julie: Wait, before I forget. The monitors in the second room are flickering again. I'll order replacements today.
+
+Omar: Thanks. Oh, and Raj, the sales dashboard is showing wrong totals again.
+
+Raj: Yeah, I saw. I could rebuild the report in Python so it stops breaking... actually no, scrap that. I'll just fix the spreadsheet formulas. I'll sort it out this weekend.
+
+Omar: Fine. What about the vendor? The invoices still don't match.
+
+Nina: Someone has to call them.
+
+Omar: I'll call the vendor on Thursday.
+
+Nina: Great. Also the onboarding doc is outdated, the new hires keep asking the same questions. I'll update it by Friday.
+
+Julie: Oh, and the air conditioning in the main office is still broken. Someone should tell facilities.
+
+Raj: Not me, I'm in the server room all day.
+
+Nina: Me neither.
+
+Omar: Okay... we'll see.
+
+Julie: Also, did anyone write the minutes from last week?
+
+Omar: Hm, I thought... no. Nobody did, I think. We should do that.
+
+Nina: Sorry, my screen froze. Did I miss anything?
+
+Omar: No, just the minutes thing. Okay, let's wrap up.

@@ -1,0 +1,80 @@
+{
+  "id": "02_client_checkin",
+  "transcript_file": "samples/02_client_checkin.txt",
+  "meeting_title": "Client check-in",
+  "meeting_date": "2026-11-03",
+  "participants": "Sarah, Priya, Ben",
+  "required_actions": [
+    {
+      "id": "formal_quote",
+      "keywords": [
+        "quote"
+      ],
+      "owner": "Sarah",
+      "due_date": "2026-11-03"
+    },
+    {
+      "id": "whitepaper",
+      "keywords": [
+        [
+          "whitepaper",
+          "white paper"
+        ]
+      ],
+      "owner": "Ben",
+      "due_date": null
+    },
+    {
+      "id": "sandbox",
+      "keywords": [
+        "sandbox"
+      ],
+      "owner": "Ben",
+      "due_date": "2026-11-05"
+    },
+    {
+      "id": "questionnaire",
+      "keywords": [
+        "questionnaire"
+      ],
+      "owner": "Priya",
+      "due_date": null
+    },
+    {
+      "id": "onboarding",
+      "keywords": [
+        "onboarding"
+      ],
+      "owner": "Ben",
+      "due_date": null
+    },
+    {
+      "id": "recap_email",
+      "keywords": [
+        "recap"
+      ],
+      "owner": "Sarah",
+      "due_date": "2026-11-03"
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "id": "sso",
+      "keywords": [
+        "sso"
+      ],
+      "why": "SSO add-on was declined"
+    },
+    {
+      "id": "starter",
+      "keywords": [
+        "starter"
+      ],
+      "why": "Starter plan was dropped for Team"
+    }
+  ],
+  "decisions_must_contain": [
+    "team"
+  ],
+  "decisions_must_not_contain": []
+}

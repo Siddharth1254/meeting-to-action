@@ -24,7 +24,7 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-WEEKDAYS_FR = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
+WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 
 def norm(text):
@@ -48,7 +48,7 @@ def build_user_message(case, transcript):
     d = dt.date.fromisoformat(case["meeting_date"])
     return (
         f"Meeting: {case['meeting_title']}\n"
-        f"Date: {case['meeting_date']} ({WEEKDAYS_FR[d.weekday()]})\n"
+        f"Date: {case['meeting_date']} ({WEEKDAYS[d.weekday()]})\n"
         f"Participants: {case['participants']}\n\n"
         f"Transcript:\n{transcript}"
     )

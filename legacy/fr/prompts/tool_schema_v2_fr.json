@@ -1,0 +1,26 @@
+{
+  "name": "save_meeting_summary",
+  "description": "Save the structured summary of the meeting",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string", "description": "3 to 5 sentence summary in French" },
+      "decisions": { "type": "array", "items": { "type": "string" } },
+      "actions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "task": { "type": "string" },
+            "owner": { "type": ["string", "null"] },
+            "due_date": { "type": ["string", "null"], "description": "YYYY-MM-DD or null" },
+            "priority": { "type": "string", "enum": ["high", "medium", "low"] }
+          },
+          "required": ["task", "owner", "due_date", "priority"]
+        }
+      },
+      "open_questions": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["summary", "decisions", "actions", "open_questions"]
+  }
+}
