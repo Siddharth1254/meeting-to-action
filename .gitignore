@@ -1,0 +1,13 @@
+# Demo videos live on Google Drive, not in the repo
+*.mp4
+*.mov
+*.mkv
+*.webm
+demo/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local secrets
+.env

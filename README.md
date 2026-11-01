@@ -10,6 +10,8 @@ nobody stated. The transcript can be in any language; **the output is always in 
 
 ![n8n workflow](docs/workflow.png)
 
+**Demo video (5 min):** [watch on Google Drive](https://drive.google.com/file/d/1LNmRG-tMwv-UHdoLhycB4aDewRrPgJx5/view?usp=sharing)
+
 ## Sample output
 
 Slack recap for a fictional product sync dated 2026-11-02 (transcript: [`samples/01_product_sync.txt`](samples/01_product_sync.txt)):
